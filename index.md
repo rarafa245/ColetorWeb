@@ -1,37 +1,61 @@
-## Welcome to GitHub Pages
+## Apresentação Inicial
 
-You can use the [editor on GitHub](https://github.com/rarafa245/ColetorWeb/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Grupo 2 - Rafael da Rocha Ferreira, Gabriel Vasconcelos Martins
+email de contato: rarafa245@gmail.com, 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Apresentaremos agora os elementos básicos para manutenção e revisão do código
+**Link do repositório**: https://github.com/rarafa245/ColetorWeb
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Informações de Coleta
 
 ```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+  - Nome de Identificação do Coletor: Group2bot
 
-- Bulleted
-- List
+  O coletor projeto atua penas em paginas publicas. Alem disso, a referencia para coletas apresentadas
+  ao coletor vem a partir do código fonte das paginas web.
+  
+  - Para obter o código fonte, basta entrar em uma pagina web, clicar com o botão direito do mouse e selecionar
+  a opção fonte da pagina de exibição. Irá aparecer a tradução em HTML da pagina desejada, basta copiar o link https
+  (ou http) da pagina desejada (ex: https://www.treinaweb.com.br/blog/criando-paginas-para-repositorios-com-o-github-pages/)
+  e aplica-lo no coletor. Tal metodo de aplicação será apresentado logo a baixo
+  
+  A coleta de paginas nao teve um alvo propriamente dito, foram feitas verias coletas de paginas diferentes e aleatorias com
+  o unico objetivo de verificar o processo de coleta e a conscistência do coletor. Alem disso, tais coletas nao foram salvas, apenas
+  printadas para o usuario, já que não foi requerido um sistema de logger ou armazenamento.
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+### Funcionamento Básico de Inicialização e Testes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rarafa245/ColetorWeb/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Será mostrado como fazer inicialização do código
 
-### Support or Contact
+```markdown
+Ao abrir o arquivo run.py, teremos o seguinte código:
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    scheduler = Scheduler(str_usr_agent="Group2bot",
+                                int_page_limit=14,
+                                int_depth_limit=6,
+                                arr_urls_seeds=[])
+    fetcher = PageFetcher(scheduler)
+
+    fetcher.insertURLs()
+    fetcher.run()
+    
+    
+o objeto scheduler ditará qual será o limite de paginas desejadas (profundidade 1) no argumento int_page_limit
+e qual será a profundidade suportada em int_depth_limit
+
+
+Abrindo o arquivo **page_fetcher.py** teremos a função **insertURLs** que é o local de agregação das urls desejadas.
+Nela, ao se fazer a inserção de uma nova url, deve-se adiciona-la a funcao e adicionar a variavel no vetor **arr_urls**
+
+Lembre-se que, apos fazer certa alteração, é necessário a alteração do objeto scheduler (codigo acima)
+```
+
+Será mostrado como fazer inicialização dos testes
+```markdown
+  Os testes se encontram na pasta testes e sao importado no arquivo runTestes.py
+  Basta apenas rodar o arquivo runTestes.py que os testes serão realizados
+```
