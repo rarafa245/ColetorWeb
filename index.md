@@ -9,6 +9,12 @@ Apresentaremos agora os elementos básicos para manutenção e revisão do códi
 ### Informações de Coleta
 
 ```markdown
+  User-agent: Group2bot
+  Allow: /                # Allow Everything 
+  Disallow: /private/     # Disallow this directory
+```
+
+```markdown
 
   - Nome de Identificação do Coletor: Group2bot
 
