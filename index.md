@@ -4,7 +4,7 @@ Grupo 2 - Rafael da Rocha Ferreira, Gabriel Vasconcelos Martins
 email de contato: rarafa245@gmail.com, 
 
 Apresentaremos agora os elementos básicos para manutenção e revisão do código
-**Link do repositório**: https://github.com/rarafa245/ColetorWeb
+**Link do repositório**: https://github.com/rarafa245/InfoColetorWeb
 
 ### Informações de Coleta
 
