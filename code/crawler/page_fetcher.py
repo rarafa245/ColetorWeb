@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from threading import Thread
+from code.util import synchronized
 import requests
 from urllib.parse import urlparse,urljoin
 import time
@@ -122,31 +123,38 @@ class PageFetcher(Thread):
         self.obj_scheduler.count_fetched_page()
         return None
 
-
-    def run(self) -> List:
+    
+    def insertURLs(self) -> List:
         '''
-            Roda as seguintes URLs e retorna seus links extraidos
+            Aloca as seguintes URLs em memória para coleta
             :parram - None
-            :return - lista com links extraidos
+            :return - None
         '''
 
-        urlDummy = (urlparse("https://pt.wikipedia.org/wiki/Programa_Olá_Mundo"), 1)
-        urlTerra = (urlparse("https://www.terra.com.br"), 1)
-        urlUOL1 = (urlparse("http://www.uol.com.br/"), 1)
-        urlBOL = (urlparse("https://www.bol.uol.com.br"), 1)
-        url3 = (urlparse("https://guilhermemuller.com.br/ead/html-css-na-pratica/montando-base-website"), 1)
-        url4 = (urlparse("https://sig.cefetmg.br/sigaa/verTelaLogin.do"), 1)
-        url5 = (urlparse("https://www.terra.com.br/esportes/lance/neto-sobre-covid-10x-pior-que-entrada-dura-de-zagueiro,f03e78d95420ebb68ca80f3a4920fd3fzik654oj.html"), 2)
+        urlDummy = (urlparse("https://www.globo.com"), 1)
+        url1 = (urlparse("https://www.terra.com.br"), 1)
+        url2 = (urlparse("http://www.uol.com.br/"), 1)
+        url3 = (urlparse("https://www.bol.uol.com.br"), 1)
+        url4 = (urlparse("https://guilhermemuller.com.br/ead/html-css-na-pratica/montando-base-website"), 1)
+        url5 = (urlparse("https://sig.cefetmg.br/sigaa/verTelaLogin.do"), 1)
+        url6 = (urlparse("https://www.terra.com.br/esportes/lance/neto-sobre-covid-10x-pior-que-entrada-dura-de-zagueiro,f03e78d95420ebb68ca80f3a4920fd3fzik654oj.html"), 1)
+        url7 = (urlparse("https://www.cefetmg.br"), 1)
+        url8 = (urlparse("https://www.cefetmg.br/noticias/cefet-mg-tem-51-vagas-abertas-para-engenharia-civil-em-curvelo/"), 1)
+        url9 = (urlparse("https://www.cefetmg.br/noticias/reconhecido-com-nota-maxima-curso-de-administracao-do-cefet-mg-abre-inscricoes/"), 1)
+        url10 = (urlparse("https://www.bbc.com/portuguese"), 1)
+        url11 = (urlparse("https://www.bbc.com/portuguese/curiosidades-50823002"), 1)
+        url12 = (urlparse("https://www.bbc.com/portuguese/internacional-54536468"), 1)
+        url13 = (urlparse("https://www.bbc.com/portuguese/geral-54521658"), 1)
+        url14 = (urlparse("https://www.bbc.com/portuguese/internacional-54522654"), 1)
+        url15 = (urlparse("https://pt.wikipedia.org/wiki/Terra_plana"), 1)
 
-        arr_urls = [urlDummy,url3,urlTerra,urlUOL1,urlBOL,url4,url5]
 
+        arr_urls = [urlDummy, url1, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15]
         [self.obj_scheduler.add_new_page(*url) for url in arr_urls]
+    
 
-        url_links = []
-
+    @synchronized
+    def run(self):
         while not self.obj_scheduler.has_finished_crawl():
-            information = self.crawl_new_url()
-            time.sleep(2)
-            url_links.append(information)  
-        
-        return url_links
+            self.crawl_new_url()
+

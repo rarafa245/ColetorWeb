@@ -77,10 +77,13 @@ class Scheduler():
                 # Caso a url inserida (sem path) esteja entre as urls descobertas, verifica se
                 # o path inserido está contido no dominio url descoberta.
 
-                for url_elements in self.dic_url_per_domain[obj_url.netloc]:
-                    if (obj_url, int_depth) == url_elements:
-                        # Caso o path inserido esteja dentro do dominio da url, retorne false 
-                        return False
+                try:
+                    for url_elements in self.dic_url_per_domain[obj_url.netloc]:
+                        if (obj_url, int_depth) == url_elements:
+                            # Caso o path inserido esteja dentro do dominio da url, retorne false 
+                            return False
+                except:
+                    return False
 
                 else:
                     # Caso o Loop For conclua e não encontre o path no dominio, retorne true
